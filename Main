@@ -1,0 +1,109 @@
+package avaliacao1;
+import java.util.Scanner;
+
+public class Main
+{
+
+	public static void main(String[] args)
+	{
+		Scanner sc= new Scanner(System.in);
+		
+		boolean entry=false;
+		int y=0;
+		
+		System.out.println();
+		System.out.println("Battleship Game");
+		System.out.println();
+		System.out.println("1) Jogar uma nova partida");
+		System.out.println("2) Ver histórico de partidas");
+		System.out.println("3) Sair");
+			
+		while (!entry)
+		{
+			entry=sc.hasNextInt();
+			if (entry)
+			{
+				y=sc.nextInt();
+				if (y>3 && y<1)
+				{
+					System.out.println("Não escolheu uma entrada válida, repita sff:");
+					entry=false;
+				}
+			}
+			else if (!entry)
+			{
+			System.out.println("Não escolheu uma entrada válida, repita sff:");
+			}
+			sc.nextLine();
+			
+			
+		}
+						
+		if (y==1)
+		{
+			System.out.println("Selecione o tamanho do campo (NxM: ");
+			System.out.println("N:");
+				
+			while (!sc.hasNextInt())
+			{
+				System.out.println("Entrada inválida, repete:");
+				sc.next();
+			}
+			int n=sc.nextInt();
+			
+			System.out.println("M:");
+				
+			while (!sc.hasNextInt())
+			{
+				System.out.println("Entrada inválida, repete:");
+				sc.next();
+			}
+			int m=sc.nextInt();
+			
+			String[][] campo= new String[n][m];
+			
+			for(int i=0; i<n; i++)
+			{
+				for (int j=0; j<m; j++)
+				{
+			          campo[i][j]=".";
+				}
+			}
+			
+			// Visualização da matriz
+			
+			for (int row =0; row<campo.length; row++) 
+			{
+		        for (int col = 0; col <campo[row].length; col++) 
+		        {
+		            System.out.print(campo[row][col]);
+		        }
+		        System.out.println();
+		    }
+			
+			// ------
+			
+		}
+		
+		if (y==2)
+		{
+			
+		}
+		
+		if (y==3)
+		{
+			System.out.println("Escolheu terminar o programa.");
+			System.exit(1);
+		}
+		
+		int win=0;
+		int loss=0;
+		int thrown=0;
+		int jogadas=0;
+		double perwin=0;
+		double perloss=0;
+		double perthrown=0;
+		double avgjogadas=0;
+		
+	}
+}
