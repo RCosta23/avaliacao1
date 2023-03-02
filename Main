@@ -1,4 +1,5 @@
 package avaliacao1;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main
@@ -7,6 +8,7 @@ public class Main
 	public static void main(String[] args)
 	{
 		Scanner sc= new Scanner(System.in);
+		Random rand= new Random();
 		
 		boolean entry=false;
 		int y=0;
@@ -41,7 +43,7 @@ public class Main
 						
 		if (y==1)
 		{
-			System.out.println("Selecione o tamanho do campo (NxM: ");
+			System.out.println("Selecione o tamanho do campo (NxM): ");
 			System.out.println("N:");
 				
 			while (!sc.hasNextInt())
@@ -60,14 +62,88 @@ public class Main
 			}
 			int m=sc.nextInt();
 			
-			String[][] campo= new String[n][m];
+			// ----------------------------------//
 			
-			for(int i=0; i<n; i++)
+			String[][] campo= new String[m][n];
+			
+			for(int i=0; i<m; i++)
 			{
-				for (int j=0; j<m; j++)
+				for (int j=0; j<n; j++)
 				{
 			          campo[i][j]=".";
 				}
+			}
+			
+			//-------------------------------------//
+			
+			boolean barco2=false;
+			boolean barco4=false;
+			int k1=-1;
+			int k2=-1;
+			int p1=-1;
+			int p2=-1;
+			
+			for (int p=0;p<100;p++)
+			{
+				int randomn= rand.nextInt(n);
+				int randomm= rand.nextInt(m);
+				campo[randomm][randomn]="S";
+				
+				while(barco4=false)
+				{
+					for (int i1=0;i1<n;i1++)
+					{
+						for (int j1=0;j1<m;j1++)
+						{
+							if((campo[i1][j1]).equals(campo[i1][j1-1])
+							&& (campo[i1][j1]).equals(campo[i1][j1-2])
+							&& (campo[i1][j1]).equals(campo[i1][j1-3]))
+							{
+								barco4=true;
+								k1=i1;
+								p1=j1;
+							}
+							
+							else if((campo[i1][j1]).equals(campo[i1-1][j1])
+							     && (campo[i1][j1]).equals(campo[i1-2][j1])
+							     && (campo[i1][j1]).equals(campo[i1-3][j1]))
+							{
+								barco4=true;
+								k2=i1;
+								p2=j1;
+							}
+						}
+					}
+				}
+				
+				while(barco4=true && barco2 ==false)
+				{
+					for (int i2=0;i2<n;i2++)
+					{
+						for (int j2=0;j2<m;j2++)
+						{
+							if((campo[i2][j2]).equals(campo[i2][j2-1])
+							&& ((k1!=i2 && p1!=j2))
+							&& ((k1!=i2 && (p1-1)!=(j2-1))))
+							{
+								barco2=true;
+							}
+							
+							else if((campo[i2][j2]).equals(campo[i2-1][j2])
+							&& ((k2!=i2 && p2!=j2))
+							&& (((k2-1)!=(i2-1) && p2!=j2)))
+							{
+								barco2=true;
+							}
+						}
+					}
+				}
+				
+				if (barco4=true && barco2==true)
+				{
+					break;
+				}
+				
 			}
 			
 			// Visualização da matriz
