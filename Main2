@@ -140,7 +140,7 @@ public class Main
 				int numerobarcos=0;
 				
 
-				while (barco4==false || barco2==false || barco1==false || p<100 || numerobarcos==barcos)
+				while (barco4==false || barco2==false || barco1==false || p<100 || numerobarcos<=barcos)
 				{
 					p++;
 					int x_rand= rand.nextInt(n); 		// x aleatorio
@@ -217,7 +217,7 @@ public class Main
 					
 // -----------------------------------------------------//					
 							
-					if ((barco_r==2) && (horientacao==0) && (y_rand<=(m-4)))	
+					if ((barco_r==2) && (horientacao==0) && (y_rand<=(m-4)) && direita4==true)	
 					{
 						for (p=0;p<4;p++)
 						{
@@ -227,7 +227,7 @@ public class Main
 						}
 					}
 					
-					if ((barco_r==2) && (horientacao==1)  && (y_rand>=3))	
+					if ((barco_r==2) && (horientacao==1)  && (y_rand>=3) && esquerda4==true)	
 					{
 						for (p=0;p<4;p++)
 						{
@@ -237,7 +237,7 @@ public class Main
 						}
 					}
 // 4					
-					if ((barco_r==2) && (horientacao==2)  && (x_rand<=(n-4)))	
+					if ((barco_r==2) && (horientacao==2)  && (x_rand<=(n-4)) && cima4==true)	
 					{
 						for (p=0;p<4;p++)
 						{
@@ -247,7 +247,7 @@ public class Main
 						}
 					}
 					
-					if ((barco_r==2) && (horientacao==3)  && (y_rand>=3))	
+					if ((barco_r==2) && (horientacao==3)  && (y_rand>=3) && baixo4==true)	
 					{
 						for (p=0;p<4;p++)
 						{
@@ -259,7 +259,7 @@ public class Main
 					
 // -----------------------------------------------------//			
 					
-					if ((barco_r==1) && (horientacao==0)  && (y_rand<=(m-2)))	
+					if ((barco_r==1) && (horientacao==0)  && (y_rand<=(m-2)) && direita2==true)	
 					{
 						for (p=0;p<2;p++)
 						{
@@ -269,7 +269,7 @@ public class Main
 						}
 					}
 					
-					if ((barco_r==1) && (horientacao==1)  && (y_rand>1))	
+					if ((barco_r==1) && (horientacao==1)  && (y_rand>1) && esquerda2==true)	
 					{
 						for (p=0;p<2;p++)
 						{
@@ -279,7 +279,7 @@ public class Main
 						}
 					}
 // 2					
-					if ((barco_r==1) && (horientacao==2)  && (x_rand<=(m-2)))	
+					if ((barco_r==1) && (horientacao==2)  && (x_rand<=(m-2)) && cima2==true)	
 					{
 						for (p=0;p<2;p++)
 						{
@@ -289,7 +289,7 @@ public class Main
 						}
 					}
 					
-					if ((barco_r==1) && (horientacao==3)  && (x_rand>1))	
+					if ((barco_r==1) && (horientacao==3)  && (x_rand>1) && baixo2==true)	
 					{
 						for (p=0;p<2;p++)
 						{
