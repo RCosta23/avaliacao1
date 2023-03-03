@@ -11,7 +11,30 @@ public class Main
 		Random rand= new Random();
 		
 		boolean entry=false;
+		boolean shootx=false;
+		boolean shooty=false;
+		int x=0;
 		int y=0;
+		int m=0;
+		int n=0;
+		int barcos=0;
+		int failedplays=0;
+		int maxtentativas=0;
+		int failedshot=0;
+		int successshot=0;
+		int peças=0;
+		int victory=0;
+		int loss=0;
+		int quit=0;
+		int jogadas=0;
+		double perwin=0;
+		double perloss=0;
+		double perthrown=0;
+		double avgjogadas=0;
+		String desistir=" ";
+		
+		
+		String[][] campo= new String [5][5];
 		
 		System.out.println();
 		System.out.println("Battleship Game");
@@ -51,7 +74,7 @@ public class Main
 				System.out.println("Entrada inválida, repete:");
 				sc.next();
 			}
-			int n=sc.nextInt();
+			n=sc.nextInt();
 			
 			System.out.println("M:");
 				
@@ -60,11 +83,29 @@ public class Main
 				System.out.println("Entrada inválida, repete:");
 				sc.next();
 			}
-			int m=sc.nextInt();
+			m=sc.nextInt();
+			
+			System.out.println("Barcos:");
+			
+			while (!sc.hasNextInt())
+			{
+				System.out.println("Entrada inválida, repete:");
+				sc.next();
+			}
+			barcos=sc.nextInt();
+			
+			System.out.println("Tiros falhados para derrota:");
+			
+			while (!sc.hasNextInt())
+			{
+				System.out.println("Entrada inválida, repete:");
+				sc.next();
+			}
+			failedplays=sc.nextInt();
 			
 			// ----------------------------------//
 			
-			String[][] campo= new String[m][n];
+			campo= new String[m][n];
 			
 			for(int i=0; i<m; i++)
 			{
@@ -176,7 +217,112 @@ public class Main
 			
 			System.out.println(barco4);
 			System.out.println(barco2);
+			for (int row =0; row<campo.length; row++) 
+			{
+		        for (int col = 0; col <campo[row].length; col++) 
+		        {
+		            if(campo[row][col].equals("S"))
+		            {
+		            	peças++;
+		            }
+		        }
+		    }
+			System.out.println(peças);
+		
+			System.out.println("Shoot at X,Y:");
 			
+			for (maxtentativas=0;
+				 maxtentativas<=(n*m) && failedshot<failedplays;
+				 maxtentativas++)
+			{
+				while (!shootx)
+				{
+					System.out.println("X:");
+					shootx=sc.hasNextInt();
+					if (shootx)
+					{
+						x=sc.nextInt();
+						if (x>m && x<0)
+						{
+							System.out.println("Não escolheu uma entrada válida, repita sff:");
+							shootx=false;
+						}
+					}
+					else if (!shootx)
+	
+						desistir=sc.nextLine();
+						if (desistir.equals("Sair"))
+						{
+							quit++;
+							System.out.println("Desistiu");
+						}
+						else
+						{
+							System.out.println("Não escolheu uma entrada válida, repita sff:");
+						}
+					sc.nextLine();
+				}
+				
+				while (!shooty)
+				{
+					System.out.println("Y:");
+					shooty=sc.hasNextInt();
+					if (shooty)
+					{
+						y=sc.nextInt();
+						if (y>n && y<0)
+						{
+							System.out.println("Não escolheu uma entrada válida, repita sff:");
+							shootx=false;
+						}
+					}
+					else if (!shooty)
+					{
+						desistir=sc.nextLine();
+						if (desistir.equals("Sair"))
+						{
+							quit++;
+							System.out.println("Desistiu");
+						}
+						else
+						{
+							System.out.println("Não escolheu uma entrada válida, repita sff:");
+						}
+					}
+					sc.nextLine();
+				}		
+				
+				if ((campo[y][x]).equals("S"))
+				{
+					campo[y][x]="X";
+					successshot++;
+					peças--;
+					jogadas++;
+					if (peças==0)
+					{
+						victory++;
+						System.out.println("Vitória.");
+					}
+				}
+				
+				else if ((campo[x][y]).equals("."))
+				{
+					campo[y][x]="O";
+					failedshot++;
+					jogadas++;
+				}
+				
+				for (int row =0; row<campo.length; row++) 
+				{
+			        for (int col = 0; col <campo[row].length; col++) 
+			        {
+			            System.out.print(campo[row][col]);
+			        }
+			        System.out.println();
+			    }
+			    
+				
+			}
 		}
 		
 		if (y==2)
@@ -189,15 +335,5 @@ public class Main
 			System.out.println("Escolheu terminar o programa.");
 			System.exit(1);
 		}
-		
-		int win=0;
-		int loss=0;
-		int thrown=0;
-		int jogadas=0;
-		double perwin=0;
-		double perloss=0;
-		double perthrown=0;
-		double avgjogadas=0;
-		
 	}
 }
