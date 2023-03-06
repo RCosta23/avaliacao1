@@ -11,7 +11,6 @@ public class Main
 		Random rand= new Random();
 		
 		boolean jogo=false;
-		
 		boolean entry=false;
 		boolean shootx=false;
 		boolean shooty=false;
@@ -357,7 +356,7 @@ public class Main
 					 maxtentativas<=(n*m) && failedshot<failedplays;
 					 maxtentativas++)
 				{
-					while (!shootx)
+					while (!shootx)										// Se não for válido o x entre 0 e m, repete, se escrever "Sair" desiste.
 					{
 						System.out.println("X:");
 						shootx=sc.hasNextInt();
@@ -386,14 +385,14 @@ public class Main
 						sc.nextLine();
 					}
 					
-					while (!shooty)
+					while (!shooty)										// Se não for válido o y entre 0 e n, repete, se escrever "Sair" desiste.
 					{
 						System.out.println("Y:");
 						shooty=sc.hasNextInt();
 						if (shooty)
 						{
 							y=sc.nextInt();
-							if (y>n && y<0)
+							if (y>n || y<0)
 							{
 								System.out.println("Não escolheu uma entrada válida, repita sff:");
 								shootx=false;
