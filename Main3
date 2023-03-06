@@ -125,6 +125,7 @@ public class Main
 					for (int j=0; j<n; j++)
 					{
 				          campo[i][j]=".";
+				          campo_player[i][j]=".";
 					}
 				}
 				
@@ -202,35 +203,35 @@ public class Main
 					&&  (campo[y_rand][x_rand].equals("."))
 					&&  (campo[y_rand][x_rand+1].equals(".")))
 					{
-						direita2=true;
+						direita2=true;					// Está livre à direita para barco de 2
 					}
 					
 					else if ((x_rand>=1)
 					&&  (campo[y_rand][x_rand].equals("."))
 					&&  (campo[y_rand][x_rand-1].equals(".")))
 					{
-						esquerda2=true;
+						esquerda2=true;					// Está livre à esquerda para barco de 2
 					}
 // 2 					
 					else if ((y_rand>=1)
 					&&  (campo[y_rand][x_rand].equals("."))
 					&&  (campo[y_rand-1][x_rand].equals(".")))
 					{
-						cima2=true;
+						cima2=true;					    // Está livre em cima para barco de 2
 					}
 					
 					else if ((y_rand<=(m-2))
 					&&  (campo[y_rand][x_rand].equals("."))
 					&&  (campo[y_rand+1][x_rand].equals(".")))
 					{
-						baixo2=true;
+						baixo2=true;					// Está livre em baixo para barco de 2
 					}
 					
 // -----------------------------------------------------//					
 							
 					else if ((barco_r==2) && (horientacao==0) && direita4==true)	
 					{
-
+																// Se é barco de 4 peças, com horientação para a direita e existe espaço à direita faz:
 						campo[y_rand][x_rand]="S";
 						campo[y_rand][x_rand+1]="S";
 						campo[y_rand][x_rand+2]="S";
@@ -243,7 +244,7 @@ public class Main
 					
 					else if ((barco_r==2) && (horientacao==1) && esquerda4==true)	
 					{
-
+																// Se é barco de 4 peças, com horientação para a esqueda e existe espaço à esquerda faz:
 						campo[y_rand][x_rand]="S";
 						campo[y_rand][x_rand-1]="S";
 						campo[y_rand][x_rand-2]="S";
@@ -253,7 +254,7 @@ public class Main
 						numerobarcos++;
 						peças=peças+4;
 					}
-// 4					
+// 4															// Se é barco de 4 peças, com horientação para cima e existe espaço acima faz:				
 					else if ((barco_r==2) && (horientacao==2)  && cima4==true)	
 					{
 
@@ -266,7 +267,7 @@ public class Main
 						numerobarcos++;
 						peças=peças+4;
 					}
-					
+																// Se é barco de 4 peças, com horientação para baixo e existe espaço para baixo faz:
 					else if ((barco_r==2) && (horientacao==3)  && baixo4==true)	
 					{
 
@@ -284,7 +285,7 @@ public class Main
 					
 					else if ((barco_r==1) && (horientacao==0) && direita2==true)	
 					{
-
+															// Se é barco de 2 peças, com horientação para a direita e existe espaço à direita faz:
 						campo[y_rand][x_rand]="S";
 						campo[y_rand][x_rand+1]="S";
 						barco2=true;
@@ -294,7 +295,7 @@ public class Main
 					
 					else if ((barco_r==1) && (horientacao==1) && esquerda2==true)	
 					{
-
+															// Se é barco de 2 peças, com horientação para a esquerda e existe espaço à esquerda faz:
 						campo[y_rand][x_rand]="S";
 						campo[y_rand][x_rand-1]="S";
 						barco2=true;
@@ -304,14 +305,14 @@ public class Main
 // 2					
 					else if ((barco_r==1) && (horientacao==2) && cima2==true)	
 					{
-
+															// Se é barco de 2 peças, com horientação para cima e existe espaço acima faz:
 						campo[y_rand][x_rand]="S";
 						campo[y_rand-1][x_rand]="S";
 						barco2=true;
 						numerobarcos++;
 						peças=peças+2;
 					}
-					
+															// Se é barco de 2 peças, com horientação para baixo e existe espaço para baixo faz:					
 					else if ((barco_r==1) && (horientacao==3) && baixo2==true)	
 					{
 						campo[y_rand][x_rand]="S";
@@ -322,7 +323,7 @@ public class Main
 					}
 					
 // -----------------------------------------------------//					
-// 1					
+// 1														// Se é barco de 1 peça faz:
 					else if ((barco_r==0) && campo[y_rand][x_rand].equals("."))
 					{
 						campo[y_rand][x_rand]="S";
@@ -331,9 +332,8 @@ public class Main
 						peças++;
 					}
 					
-					
-// -----------------------------------------------------//						
-				}
+							
+				}					// Fecha o while
 				
 				
 // -----------------------------------------------------//
@@ -416,6 +416,12 @@ public class Main
 						sc.nextLine();
 					}		
 					
+// -----------------------------------------------------//
+// Resultado a cada disparo:		
+
+					
+// Só falta trocar campo[y][x]="X" por campo_player[y][x]="X" etc...
+					
 					if ((campo[y][x]).equals("S"))
 					{
 						campo[y][x]="X";
@@ -440,19 +446,9 @@ public class Main
 							jogos++;
 						}
 					}
-					
-					for (int row =0; row<campo.length; row++) 
-					{
-				        for (int col = 0; col <campo[row].length; col++) 
-				        {
-				            System.out.print(campo[row][col]);
-				        }
-				        System.out.println();
-				    }
-				    
-					
-				}
-			}
+
+				}						// Fecha a secção de Shoot
+			}					// Fecha y==1
 		
 		
 // -----------------------------------------------------//	
