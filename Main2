@@ -173,7 +173,7 @@ public class Main
 					&&  (campo[y_rand][x_rand+2].equals("."))
 					&&  (campo[y_rand][x_rand+3].equals(".")))
 					{
-						cima4=true;
+						cima4=true; // para cima é menos
 					}
 							
 					else if ((x_rand>=3)
@@ -182,7 +182,7 @@ public class Main
 					&&  (campo[y_rand][x_rand-2].equals("."))
 					&&  (campo[y_rand][x_rand-3].equals(".")))
 					{
-						baixo4=true;
+						baixo4=true; // para baixo é mais
 					}
 							
 // -----------------------------------------------------//
