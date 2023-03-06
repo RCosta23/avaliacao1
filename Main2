@@ -224,6 +224,7 @@ public class Main
 							campo[y_rand+p][x_rand]="S";
 							barco4=true;
 							barcos++;
+                                                        peças=peças+4;
 						}
 					}
 					
@@ -234,6 +235,7 @@ public class Main
 							campo[y_rand-p][x_rand]="S";
 							barco4=true;
 							barcos++;
+                                                        peças=peças+4;
 						}
 					}
 // 4					
@@ -244,6 +246,7 @@ public class Main
 							campo[y_rand][x_rand+p]="S";
 							barco4=true;
 							barcos++;
+                                                        peças=peças+4;
 						}
 					}
 					
@@ -254,6 +257,7 @@ public class Main
 							campo[y_rand][x_rand-p]="S";
 							barco4=true;
 							barcos++;
+                                                        peças=peças+4;
 						}
 					}
 					
@@ -266,6 +270,7 @@ public class Main
 							campo[y_rand+p][x_rand]="S";
 							barco2=true;
 							barcos++;
+                                                        peças=peças+2;
 						}
 					}
 					
@@ -276,6 +281,7 @@ public class Main
 							campo[y_rand-p][x_rand]="S";
 							barco2=true;
 							barcos++;
+                                                        peças=peças+2;
 						}
 					}
 // 2					
@@ -286,6 +292,7 @@ public class Main
 							campo[y_rand][x_rand+p]="S";
 							barco2=true;
 							barcos++;
+                                                        peças=peças+2;
 						}
 					}
 					
@@ -296,6 +303,7 @@ public class Main
 							campo[y_rand][x_rand-p]="S";
 							barco2=true;
 							barcos++;
+                                                        peças=peças+2;
 						}
 					}
 					
@@ -306,6 +314,7 @@ public class Main
 						campo[y_rand][x_rand]="S";
 						barco1=true;
 						barcos++;
+                                                peças++;
 					}
 					
 					
