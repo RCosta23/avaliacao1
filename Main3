@@ -88,8 +88,15 @@ public class Main
 				{
 					System.out.println("Entrada inválida, repete:");
 					sc.next();
-				}
+				}				
 				m=sc.nextInt();
+				
+				while ((m*n)<8)
+				{
+					System.out.println("Matriz não fornece condições para colocação dos navios necessários, repete:");
+					sc.next();
+					m=sc.nextInt();
+				}
 				
 				System.out.println("Barcos:");
 				
@@ -123,8 +130,6 @@ public class Main
 				
 				//-------------------------------------//
 				
-				int k1=-1;
-				int k2=-1;
 				int p=0;
 				int p3=0;
 				boolean direita4=false;
@@ -143,8 +148,9 @@ public class Main
 				int numerobarcos=0;
 				
 
-				for (p3=0; (p3<100);p3++)
+				while ((barco4==false || barco2==false || barco1==false) && p3<100 && numerobarcos<=barcos)
 				{
+					p3++;
 					int x_rand= rand.nextInt(n); 		// x aleatorio
 					int y_rand= rand.nextInt(m); 		// y aleatorio
 					int barco_r= rand.nextInt(3); 		// barco de dimensao 1,2 ou 4 aleatorio
@@ -358,7 +364,7 @@ public class Main
 						if (shootx)
 						{
 							x=sc.nextInt();
-							if (x>m && x<0)
+							if (x>m || x<0)
 							{
 								System.out.println("Não escolheu uma entrada válida, repita sff:");
 								shootx=false;
