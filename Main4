@@ -74,21 +74,49 @@ public class Main
 				System.out.println("Selecione o tamanho do campo (NxM): ");
 				System.out.println("N:");
 					
-				while (!sc.hasNextInt())
+				while (!sc.hasNextInt() )
 				{
 					System.out.println("Entrada inválida, repete:");
-					sc.next();
+					sc.nextLine();
 				}
-				n=sc.nextInt();
+				boolean entra1=false;
+				while (!entra1)
+				{
+					n=sc.nextInt();
+					if (n<15 || n>30)
+					{
+						System.out.println("Entrada inválida, repete:");
+						sc.nextLine();
+					}
+					else
+					{
+						entra1=true;
+					}
+				}
+
 				
 				System.out.println("M:");
 					
 				while (!sc.hasNextInt())
 				{
 					System.out.println("Entrada inválida, repete:");
-					sc.next();
-				}				
-				m=sc.nextInt();
+					sc.nextLine();
+				}
+				
+				boolean entra2=false;
+				while (!entra2)
+				{
+					m=sc.nextInt();
+					if (m<15 || m>30)
+					{
+						System.out.println("Entrada inválida, repete:");
+						sc.nextLine();
+					}
+					else
+					{
+						entra2=true;
+					}
+				}
 				
 				while ((m*n)<8)
 				{
