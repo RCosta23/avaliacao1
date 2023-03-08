@@ -1,0 +1,528 @@
+package avaliacao1;
+import java.util.Random;
+import java.util.Scanner;
+
+public class Main
+{
+
+	public static void main(String[] args)
+	{
+		Scanner sc= new Scanner(System.in);
+		Random rand= new Random();
+		
+		boolean jogo=false;
+		boolean entry=false;
+		boolean shootx=false;
+		boolean shooty=false;
+		int x=0;
+		int y=0;
+		int m=0;
+		int n=0;
+		int barcos=0;
+		int failedplays=0;
+		int maxtentativas=0;
+		int failedshot=0;
+		int successshot=0;
+		int peças=0;
+		int victory=0;
+		int loss=0;
+		int quit=0;
+		int jogadas=0;
+		int jogos=0;
+		double perwin=0;
+		double perloss=0;
+		double perthrown=0;
+		double avgjogadas=0;
+		String desistir=" ";
+		
+		String[][] campo= new String [5][5];
+		String[][] campo_player=new String [5][5];
+		
+		while (!jogo)
+		{
+		
+			System.out.println();
+			System.out.println("Battleship Game");
+			System.out.println();
+			System.out.println("1) Jogar uma nova partida");
+			System.out.println("2) Ver histórico de partidas");
+			System.out.println("3) Sair");
+				
+			while (!entry)
+			{
+				entry=sc.hasNextInt();
+				if (entry)
+				{
+					y=sc.nextInt();
+					if (y>3 && y<1)
+					{
+						System.out.println("Não escolheu uma entrada válida, repita sff:");
+						entry=false;
+					}
+				}
+				else if (!entry)
+				{
+				System.out.println("Não escolheu uma entrada válida, repita sff:");
+				}
+				sc.nextLine();
+				
+				
+			}
+							
+			if (y==1)
+			{
+				System.out.println("Selecione o tamanho do campo (NxM): ");
+				System.out.println("N:");
+					
+				while (!sc.hasNextInt())
+				{
+					System.out.println("Entrada inválida, repete:");
+					sc.next();
+				}
+				n=sc.nextInt();
+				
+				System.out.println("M:");
+					
+				while (!sc.hasNextInt())
+				{
+					System.out.println("Entrada inválida, repete:");
+					sc.next();
+				}				
+				m=sc.nextInt();
+				
+				while ((m*n)<8)
+				{
+					System.out.println("Matriz não fornece condições para colocação dos navios necessários, repete:");
+					sc.next();
+					m=sc.nextInt();
+				}
+				
+				System.out.println("Barcos:");
+				
+				while (!sc.hasNextInt())
+				{
+					System.out.println("Entrada inválida, repete:");
+					sc.next();
+				}
+				barcos=sc.nextInt();
+				
+				System.out.println("Tiros falhados para derrota:");
+				
+				while (!sc.hasNextInt())
+				{
+					System.out.println("Entrada inválida, repete:");
+					sc.next();
+				}
+				failedplays=sc.nextInt();
+				
+				// ----------------------------------//
+				
+				campo= new String[m][n];
+				//campo_player= new String[m][n];
+
+				
+				for(int i=0; i<m; i++)
+				{
+					for (int j=0; j<n; j++)
+					{
+				          campo[i][j]=".";
+				          //campo_player[i][j]=".";
+					}
+				}
+				
+				//-------------------------------------//
+				
+				int p=0;
+				int p3=0;
+				boolean direita4=false;
+				boolean esquerda4=false;
+				boolean cima4=false;
+				boolean baixo4=false;
+				boolean direita2=false;
+				boolean esquerda2=false;
+				boolean cima2=false;
+				boolean baixo2=false;
+				
+				boolean barco4=false;
+				boolean barco2=false;
+				boolean barco1=false;
+				
+				int numerobarcos=0;
+				
+
+				while ((barco4==false || barco2==false || barco1==false || numerobarcos<barcos) && p3<100)
+				{
+					p3++;
+					int x_rand= rand.nextInt(n); 		// x aleatorio
+					int y_rand= rand.nextInt(m); 		// y aleatorio
+					int barco_r= rand.nextInt(3); 		// barco de dimensao 1,2 ou 4 aleatorio
+					int horientacao= rand.nextInt(4);	// horientacao aleatoria (0=direita, 1= esquerda, 2=cima, 3=baixo)
+					
+					
+					System.out.println(x_rand);
+					System.out.println(y_rand);
+					
+// -----------------------------------------------------//
+					if ((x_rand<=(n-4) && horientacao==0 && barco_r==2)
+					&&  (campo[y_rand][x_rand].equals("."))
+					&&  (campo[y_rand][x_rand+1].equals("."))
+					&&  (campo[y_rand][x_rand+2].equals("."))
+					&&  (campo[y_rand][x_rand+3].equals(".")))
+					{
+						direita4=true;					// Está livre à direita para barco de 4
+					}
+							
+					if ((x_rand>=3 && horientacao==1 && barco_r==2)
+					&&  (campo[y_rand][x_rand].equals("."))
+					&&  (campo[y_rand][x_rand-1].equals("."))
+					&&  (campo[y_rand][x_rand-2].equals("."))
+					&&  (campo[y_rand][x_rand-3].equals(".")))
+					{
+						esquerda4=true;					// Está livre à esquerda para barco de 4
+					}
+// 4								
+					if ((y_rand>=3 && horientacao==2 && barco_r==2)
+					&&  (campo[y_rand][x_rand].equals("."))
+					&&  (campo[y_rand-1][x_rand].equals("."))
+					&&  (campo[y_rand-2][x_rand].equals("."))
+					&&  (campo[y_rand-3][x_rand].equals(".")))
+					{
+						cima4=true;						// Está livre em cima para barco de 4
+					}
+							
+					if ((y_rand<=(m-4) && horientacao==3 && barco_r==2)
+					&&  (campo[y_rand][x_rand].equals("."))
+					&&  (campo[y_rand+1][x_rand].equals("."))
+					&&  (campo[y_rand+2][x_rand].equals("."))
+					&&  (campo[y_rand+3][x_rand].equals(".")))
+					{
+						baixo4=true;					// Está livre em baixo para barco de 4
+					}
+							
+// -----------------------------------------------------//
+					
+					if ((x_rand<=(n-2) && horientacao==0 && barco_r==1)
+					&&  (campo[y_rand][x_rand].equals("."))
+					&&  (campo[y_rand][x_rand+1].equals(".")))
+					{
+						direita2=true;					// Está livre à direita para barco de 2
+					}
+					
+					if ((x_rand>=1 && horientacao==1 && barco_r==1)
+					&&  (campo[y_rand][x_rand].equals("."))
+					&&  (campo[y_rand][x_rand-1].equals(".")))
+					{
+						esquerda2=true;					// Está livre à esquerda para barco de 2
+					}
+// 2 					
+					if ((y_rand>=1 && horientacao==2 && barco_r==1)
+					&&  (campo[y_rand][x_rand].equals("."))
+					&&  (campo[y_rand-1][x_rand].equals(".")))
+					{
+						cima2=true;					    // Está livre em cima para barco de 2
+					}
+					
+					if ((y_rand<=(m-2) && horientacao==3 && barco_r==1)
+					&&  (campo[y_rand][x_rand].equals("."))
+					&&  (campo[y_rand+1][x_rand].equals(".")))
+					{
+						baixo2=true;					// Está livre em baixo para barco de 2
+					}
+					
+// -----------------------------------------------------//					
+
+					if (direita4==true)	
+					{
+																// Se é barco de 4 peças, com horientação para a direita e existe espaço à direita faz:
+						campo[y_rand][x_rand]="S";
+						campo[y_rand][x_rand+1]="S";
+						campo[y_rand][x_rand+2]="S";
+						campo[y_rand][x_rand+3]="S";
+						barco4=true;
+
+						numerobarcos++;
+						peças=peças+4;
+						direita4=false;
+						
+												
+					}
+					
+					if (esquerda4==true)	   
+					{
+																// Se é barco de 4 peças, com horientação para a esqueda e existe espaço à esquerda faz:
+						campo[y_rand][x_rand]="S";
+						campo[y_rand][x_rand-1]="S";
+						campo[y_rand][x_rand-2]="S";
+						campo[y_rand][x_rand-3]="S";
+						barco4=true;
+						
+						numerobarcos++;
+						peças=peças+4;
+						esquerda4=false;
+
+						
+						
+					}
+// 4															// Se é barco de 4 peças, com horientação para cima e existe espaço acima faz:				
+					if (cima4==true)	
+					{
+
+						campo[y_rand][x_rand]="S";
+						campo[y_rand-1][x_rand]="S";
+						campo[y_rand-2][x_rand]="S";
+						campo[y_rand-3][x_rand]="S";
+						barco4=true;
+						
+						numerobarcos++;
+						peças=peças+4;
+						cima4=false;
+
+
+					}
+																// Se é barco de 4 peças, com horientação para baixo e existe espaço para baixo faz:
+					if (baixo4==true)	
+					{
+
+						campo[y_rand][x_rand]="S";
+						campo[y_rand+1][x_rand]="S";
+						campo[y_rand+2][x_rand]="S";
+						campo[y_rand+3][x_rand]="S";
+						barco4=true;
+							
+						numerobarcos++;
+						peças=peças+4;
+						baixo4=false;
+
+
+					}
+					
+// -----------------------------------------------------//			
+					
+					if (direita2==true)	
+					{
+															// Se é barco de 2 peças, com horientação para a direita e existe espaço à direita faz:
+						campo[y_rand][x_rand]="S";
+						campo[y_rand][x_rand+1]="S";
+						barco2=true;
+						numerobarcos++;
+						peças=peças+2;
+						direita2=false;
+
+
+					}
+					
+					else if (esquerda2==true)	
+					{
+															// Se é barco de 2 peças, com horientação para a esquerda e existe espaço à esquerda faz:
+						campo[y_rand][x_rand]="S";
+						campo[y_rand][x_rand-1]="S";
+						barco2=true;
+						numerobarcos++;
+						peças=peças+2;
+						esquerda2=false;
+
+
+					}
+// 2					
+					else if (cima2==true)	
+					{
+															// Se é barco de 2 peças, com horientação para cima e existe espaço acima faz:
+						campo[y_rand][x_rand]="S";
+						campo[y_rand-1][x_rand]="S";
+						barco2=true;
+						numerobarcos++;
+						peças=peças+2;
+						cima2=false;
+
+
+					}
+															// Se é barco de 2 peças, com horientação para baixo e existe espaço para baixo faz:					
+					else if (baixo2==true)	
+					{
+						campo[y_rand][x_rand]="S";
+						campo[y_rand+1][x_rand]="S";
+						barco2=true;
+						numerobarcos++;
+						peças=peças+2;
+						baixo2=false;
+
+
+					}
+					
+// -----------------------------------------------------//					
+// 1														// Se é barco de 1 peça faz:
+					else if ((barco_r==0) && campo[y_rand][x_rand].equals("."))
+					{
+						campo[y_rand][x_rand]="S";
+						barco1=true;
+						numerobarcos++;
+						peças++;
+					}
+
+							
+				}					// Fecha o while
+				
+				
+// -----------------------------------------------------//
+// Visualização da matriz
+				
+				for (int row =0; row<campo.length; row++) 
+				{
+			        for (int col = 0; col <campo[row].length; col++) 
+			        {
+			            System.out.print(campo[row][col]);
+			        }
+			        System.out.println();
+			    }
+				
+				System.out.println(numerobarcos);
+// -----------------------------------------------------//
+//Shoot				
+				
+				System.out.println("Shoot at X,Y:");
+				
+				for (maxtentativas=0;
+					 maxtentativas<=(n*m) && failedshot<failedplays;
+					 maxtentativas++)
+				{
+					while (!shootx)										// Se não for válido o x entre 0 e m, repete, se escrever "Sair" desiste.
+					{
+						System.out.println("X:");
+						shootx=sc.hasNextInt();
+						if (shootx)
+						{
+							y=sc.nextInt();
+							if (y>m || y<0)
+							{
+								System.out.println("Não escolheu uma entrada válida, repita sff:");
+								shootx=false;
+							}
+						}
+						else if (!shootx)
+		
+							desistir=sc.nextLine();
+							if (desistir.equals("Sair"))
+							{
+								quit++;
+								jogos++;
+								System.out.println("Desistiu");
+							}
+							else
+							{
+								System.out.println("Não escolheu uma entrada válida, repita sff:");
+							}
+						sc.nextLine();
+					}
+					
+					while (!shooty)										// Se não for válido o y entre 0 e n, repete, se escrever "Sair" desiste.
+					{
+						System.out.println("Y:");
+						shooty=sc.hasNextInt();
+						if (shooty)
+						{
+							x=sc.nextInt();
+							if (x>n || x<0)
+							{
+								System.out.println("Não escolheu uma entrada válida, repita sff:");
+								shootx=false;
+							}
+						}
+						else if (!shooty)
+						{
+							desistir=sc.nextLine();
+							if (desistir.equals("Sair"))
+							{
+								quit++;
+								jogos++;
+								System.out.println("Desistiu");
+							}
+							else
+							{
+								System.out.println("Não escolheu uma entrada válida, repita sff:");
+							}
+						}
+						sc.nextLine();
+					}		
+					
+// -----------------------------------------------------//
+// Resultado a cada disparo:		
+
+					
+// Só falta trocar campo[y][x]="X" por campo_player[y][x]="X" etc...
+					
+					if ((campo[y][x]).equals("S"))
+					{
+						campo[y][x]="X";
+						successshot++;
+						peças--;
+						jogadas++;
+						if (peças==0)
+						{
+							victory++;
+							jogos++;
+						}
+					}
+					
+					else if ((campo[y][x]).equals("."))
+					{
+						campo[y][x]="O";
+						failedshot++;
+						jogadas++;
+						if (failedshot==failedplays)
+						{
+							loss++;
+							jogos++;
+						}
+					}
+					
+					
+					for (int row =0; row<campo.length; row++) 
+					{
+				        for (int col = 0; col <campo[row].length; col++) 
+				        {
+				            System.out.print(campo[row][col]);
+				        }
+				        System.out.println();
+				    }
+					
+					
+					// Para parar:
+					int k=0;
+					System.out.println("k:");
+					k=sc.nextInt();
+
+				}						// Fecha a secção de Shoot
+			}					// Fecha y==1
+		
+		
+// -----------------------------------------------------//	
+// Histórico
+		
+		
+				if (y==2)
+				{
+					System.out.println("Número de Vitórias: "+victory+".");
+					System.out.println("Número de Derrotas: "+loss+".");
+					System.out.println("Número de Desistências: "+quit+".");
+					System.out.println();
+					System.out.println("Número de jogadas: "+jogadas+".");
+					System.out.println("Percentagem de Vitórias: "+(victory/jogos)*100+".");
+					System.out.println("Percentagem de Derrotas: "+(loss/jogos)*100+".");
+					System.out.println("Percentagem de Desistências: "+(quit/jogos)*100+".");
+					System.out.println();
+					System.out.println("Média de jogadas por jogo: "+jogadas/jogos+".");
+
+				}
+		
+		
+// -----------------------------------------------------//		
+// Terminar
+		
+				if (y==3)
+				{
+					System.out.println("Escolheu terminar o programa.");
+					jogo=true;
+				}
+		}								// Fecha o while do jogo (boolean)
+	}
+}
