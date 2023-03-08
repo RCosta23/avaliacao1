@@ -176,6 +176,9 @@ public class Main
 				boolean barco1=false;
 				
 				int numerobarcos=0;
+				int nbarco4=0;
+				int nbarco2=0;
+				int nbarco1=0;
 				
 
 				while ((barco4==false || barco2==false || barco1==false || numerobarcos<barcos) && p3<100)
@@ -271,6 +274,7 @@ public class Main
 						numerobarcos++;
 						peças=peças+4;
 						direita4=false;			
+						nbarco4++;
 					}
 					
 					if (esquerda4==true)	   
@@ -285,6 +289,7 @@ public class Main
 						numerobarcos++;
 						peças=peças+4;
 						esquerda4=false;	
+						nbarco4++;
 					}
 // 4															// Se é barco de 4 peças, com horientação para cima e existe espaço acima faz:				
 					if (cima4==true)	
@@ -299,6 +304,7 @@ public class Main
 						numerobarcos++;
 						peças=peças+4;
 						cima4=false;
+						nbarco4++;
 					}
 																// Se é barco de 4 peças, com horientação para baixo e existe espaço para baixo faz:
 					if (baixo4==true)	
@@ -313,6 +319,7 @@ public class Main
 						numerobarcos++;
 						peças=peças+4;
 						baixo4=false;
+						nbarco4++;
 					}
 					
 // -----------------------------------------------------//			
@@ -329,6 +336,7 @@ public class Main
 						numerobarcos++;
 						peças=peças+2;
 						direita2=false;
+						nbarco2++;
 					}
 					
 					else if (esquerda2==true)	
@@ -343,6 +351,7 @@ public class Main
 						numerobarcos++;
 						peças=peças+2;
 						esquerda2=false;	
+						nbarco2++;
 					}
 // 2					
 					else if (cima2==true)	
@@ -357,6 +366,7 @@ public class Main
 						numerobarcos++;
 						peças=peças+2;
 						cima2=false;
+						nbarco2++;
 					}
 															// Se é barco de 2 peças, com horientação para baixo e existe espaço para baixo faz:					
 					else if (baixo2==true)	
@@ -370,6 +380,7 @@ public class Main
 						numerobarcos++;
 						peças=peças+2;
 						baixo2=false;
+						nbarco2++;
 					}
 					
 // -----------------------------------------------------//					
@@ -380,6 +391,7 @@ public class Main
 						barco1=true;
 						numerobarcos++;
 						peças++;
+						nbarco1++;
 					}
 
 							
@@ -388,7 +400,13 @@ public class Main
 				
 // -----------------------------------------------------//
 // Visualização da matriz
-				
+				System.out.println();
+				System.out.println("Temos "+numerobarcos+" barcos:");
+				System.out.println(nbarco4+" barcos de 4 dimensões.");
+				System.out.println(nbarco2+" barcos de 2 dimensões.");
+				System.out.println(nbarco1+" barcos de 1 dimensão.");
+				System.out.println();
+
 				System.out.print(" ");
 				System.out.print(" ");
 				System.out.print("X");
@@ -405,8 +423,8 @@ public class Main
 						System.out.println(z+"  ");
 					}
 				}
-				System.out.print("_");
 				System.out.print("Y");
+				System.out.print("_");
 				System.out.print("_");
 				System.out.print("|");
 				for (z=0;z<=m-1;z++)
@@ -452,7 +470,7 @@ public class Main
 				//System.out.println(numerobarcos);
 // -----------------------------------------------------//
 //Shoot				
-				
+				System.out.println();
 				System.out.println("Shoot at X,Y:");
 				
 				for (maxtentativas=0;
@@ -465,8 +483,8 @@ public class Main
 						shootx=sc.hasNextInt();
 						if (shootx)
 						{
-							y=sc.nextInt();
-							if (y>m || y<0)
+							x=sc.nextInt();
+							if (x>n || x<0)
 							{
 								System.out.println("Não escolheu uma entrada válida, repita sff:");
 								shootx=false;
@@ -494,8 +512,8 @@ public class Main
 						shooty=sc.hasNextInt();
 						if (shooty)
 						{
-							x=sc.nextInt();
-							if (x>n || x<0)
+							y=sc.nextInt();
+							if (y>m || y<0)
 							{
 								System.out.println("Não escolheu uma entrada válida, repita sff:");
 								shootx=false;
@@ -548,13 +566,68 @@ public class Main
 							jogos++;
 						}
 					}
+
+
+// -----------------------------------------------------//
+// Visualização da matriz					
 					
+					
+					
+					System.out.print(" ");
+					System.out.print(" ");
+					System.out.print("X");
+					System.out.print("|");
+					for (z=0;z<=m-1;z++)
+					{
+						if (z<m-1)
+						{
+							System.out.print(z+"  ");
+						}
+						else
+						{
+							System.out.println(z+"  ");
+						}
+					}
+					System.out.print("Y");
+					System.out.print("_");
+					System.out.print("_");
+					System.out.print("|");
+					for (z=0;z<=m-1;z++)
+					{
+						if (z>=10) 
+						{
+							System.out.print("__  ");
+						}
+						else 
+						{
+							System.out.print("__ ");
+						}
+					}
+					System.out.println();
 					
 					for (int row =0; row<campo.length; row++) 
 					{
+						if (row<10)
+						{
+					       	System.out.print(" "+row+" |");
+						}
+						else 
+						{
+					        System.out.print(" "+row+"|");
+						}
+						
 				        for (int col = 0; col <campo[row].length; col++) 
 				        {
+				        	
 				            System.out.print(campo[row][col]);
+				            if (col<10)
+				            {
+					            System.out.print("  ");
+				            }
+				            else
+				            {
+					            System.out.print("   ");
+				            }
 				        }
 				        System.out.println();
 				    }
