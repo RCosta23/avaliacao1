@@ -71,15 +71,32 @@ public class Main
 							
 			if (y==1)
 			{
+				boolean entra1=false;
+				boolean entra2=false;
+				
 				System.out.println("Selecione o tamanho do campo (NxM): ");
 				System.out.println("N:");
-					
+				
+				
 				while (!sc.hasNextInt() )
 				{
 					System.out.println("Entrada inválida, repete:");
+//					if (sc.hasNextLine())
+//					{
+//						String n1=sc.nextLine();
+//						if (n1.equals("quit"))
+//						{ 
+//							quit++;
+//							System.out.println("Desistiu.");
+//							jogo=true;
+//							entra1=true;
+//							entra2=true;
+//							break;
+//						}
+//					}
 					sc.nextLine();
 				}
-				boolean entra1=false;
+				
 				while (!entra1)
 				{
 					n=sc.nextInt();
@@ -88,6 +105,8 @@ public class Main
 						System.out.println("Entrada inválida, repete:");
 						sc.nextLine();
 					}
+					
+					
 					else
 					{
 						entra1=true;
@@ -103,7 +122,6 @@ public class Main
 					sc.nextLine();
 				}
 				
-				boolean entra2=false;
 				while (!entra2)
 				{
 					m=sc.nextInt();
@@ -493,7 +511,7 @@ public class Main
 						else if (!shootx)
 		
 							desistir=sc.nextLine();
-							if (desistir.equals("Sair"))
+							if (desistir.equals("quit"))
 							{
 								quit++;
 								jogos++;
@@ -522,7 +540,7 @@ public class Main
 						else if (!shooty)
 						{
 							desistir=sc.nextLine();
-							if (desistir.equals("Sair"))
+							if (desistir.equals("quit"))
 							{
 								quit++;
 								jogos++;
