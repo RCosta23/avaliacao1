@@ -187,8 +187,8 @@ public class Main
 					int horientacao= rand.nextInt(4);	// horientacao aleatoria (0=direita, 1= esquerda, 2=cima, 3=baixo)
 					
 					
-					System.out.println(x_rand);
-					System.out.println(y_rand);
+//					System.out.println(x_rand);
+//					System.out.println(y_rand);
 					
 // -----------------------------------------------------//
 					if ((x_rand<=(n-4) && horientacao==0 && barco_r==2)
@@ -262,66 +262,57 @@ public class Main
 					if (direita4==true)	
 					{
 																// Se é barco de 4 peças, com horientação para a direita e existe espaço à direita faz:
-						campo[y_rand][x_rand]="S";
-						campo[y_rand][x_rand+1]="S";
-						campo[y_rand][x_rand+2]="S";
-						campo[y_rand][x_rand+3]="S";
-						barco4=true;
+						for (p=0;p<4;p++)
+						{
+							campo[y_rand][x_rand+p]="S";
+						}
 
+						barco4=true;
 						numerobarcos++;
 						peças=peças+4;
-						direita4=false;
-						
-												
+						direita4=false;			
 					}
 					
 					if (esquerda4==true)	   
 					{
 																// Se é barco de 4 peças, com horientação para a esqueda e existe espaço à esquerda faz:
-						campo[y_rand][x_rand]="S";
-						campo[y_rand][x_rand-1]="S";
-						campo[y_rand][x_rand-2]="S";
-						campo[y_rand][x_rand-3]="S";
-						barco4=true;
+						for (p=0;p<4;p++)
+						{
+							campo[y_rand][x_rand-p]="S";
+						}
 						
+						barco4=true;
 						numerobarcos++;
 						peças=peças+4;
-						esquerda4=false;
-
-						
-						
+						esquerda4=false;	
 					}
 // 4															// Se é barco de 4 peças, com horientação para cima e existe espaço acima faz:				
 					if (cima4==true)	
 					{
 
-						campo[y_rand][x_rand]="S";
-						campo[y_rand-1][x_rand]="S";
-						campo[y_rand-2][x_rand]="S";
-						campo[y_rand-3][x_rand]="S";
-						barco4=true;
+						for (p=0;p<4;p++)
+						{
+							campo[y_rand-p][x_rand]="S";
+						}
 						
+						barco4=true;
 						numerobarcos++;
 						peças=peças+4;
 						cima4=false;
-
-
 					}
 																// Se é barco de 4 peças, com horientação para baixo e existe espaço para baixo faz:
 					if (baixo4==true)	
 					{
 
-						campo[y_rand][x_rand]="S";
-						campo[y_rand+1][x_rand]="S";
-						campo[y_rand+2][x_rand]="S";
-						campo[y_rand+3][x_rand]="S";
+						for (p=0;p<4;p++)
+						{
+							campo[y_rand+p][x_rand]="S";
+						}
+						
 						barco4=true;
-							
 						numerobarcos++;
 						peças=peças+4;
 						baixo4=false;
-
-
 					}
 					
 // -----------------------------------------------------//			
@@ -329,52 +320,56 @@ public class Main
 					if (direita2==true)	
 					{
 															// Se é barco de 2 peças, com horientação para a direita e existe espaço à direita faz:
-						campo[y_rand][x_rand]="S";
-						campo[y_rand][x_rand+1]="S";
+						for (p=0;p<2;p++)
+						{
+							campo[y_rand][x_rand+p]="S";
+						}
+						
 						barco2=true;
 						numerobarcos++;
 						peças=peças+2;
 						direita2=false;
-
-
 					}
 					
 					else if (esquerda2==true)	
 					{
 															// Se é barco de 2 peças, com horientação para a esquerda e existe espaço à esquerda faz:
-						campo[y_rand][x_rand]="S";
-						campo[y_rand][x_rand-1]="S";
+						for (p=0;p<2;p++)
+						{
+							campo[y_rand][x_rand-p]="S";
+						}
+						
 						barco2=true;
 						numerobarcos++;
 						peças=peças+2;
-						esquerda2=false;
-
-
+						esquerda2=false;	
 					}
 // 2					
 					else if (cima2==true)	
 					{
 															// Se é barco de 2 peças, com horientação para cima e existe espaço acima faz:
-						campo[y_rand][x_rand]="S";
-						campo[y_rand-1][x_rand]="S";
+						for (p=0;p<2;p++)
+						{
+							campo[y_rand-p][x_rand]="S";
+						}
+					
 						barco2=true;
 						numerobarcos++;
 						peças=peças+2;
 						cima2=false;
-
-
 					}
 															// Se é barco de 2 peças, com horientação para baixo e existe espaço para baixo faz:					
 					else if (baixo2==true)	
 					{
-						campo[y_rand][x_rand]="S";
-						campo[y_rand+1][x_rand]="S";
+						for (p=0;p<2;p++)
+						{
+							campo[y_rand+p][x_rand]="S";
+						}
+						
 						barco2=true;
 						numerobarcos++;
 						peças=peças+2;
 						baixo2=false;
-
-
 					}
 					
 // -----------------------------------------------------//					
@@ -394,16 +389,67 @@ public class Main
 // -----------------------------------------------------//
 // Visualização da matriz
 				
+				System.out.print(" ");
+				System.out.print(" ");
+				System.out.print("X");
+				System.out.print("|");
+				int z=0;
+				for (z=0;z<=m-1;z++)
+				{
+					if (z<m-1)
+					{
+						System.out.print(z+"  ");
+					}
+					else
+					{
+						System.out.println(z+"  ");
+					}
+				}
+				System.out.print("_");
+				System.out.print("Y");
+				System.out.print("_");
+				System.out.print("|");
+				for (z=0;z<=m-1;z++)
+				{
+					if (z>=10) 
+					{
+						System.out.print("__  ");
+					}
+					else 
+					{
+						System.out.print("__ ");
+					}
+				}
+				System.out.println();
+				
 				for (int row =0; row<campo.length; row++) 
 				{
+					if (row<10)
+					{
+				       	System.out.print(" "+row+" |");
+					}
+					else 
+					{
+				        System.out.print(" "+row+"|");
+					}
+					
 			        for (int col = 0; col <campo[row].length; col++) 
 			        {
+			        	
 			            System.out.print(campo[row][col]);
+			            if (col<10)
+			            {
+				            System.out.print("  ");
+			            }
+			            else
+			            {
+				            System.out.print("   ");
+			            }
 			        }
 			        System.out.println();
 			    }
 				
-				System.out.println(numerobarcos);
+				//System.out.println(numerobarcos);
 // -----------------------------------------------------//
 //Shoot				
 				
