@@ -21,20 +21,14 @@ public class Main
 		int z=0;
 		int pick=0;
 		int barcos=0;
-		int failedplays=0;
 		int maxtentativas=0;
-		int failedshot=0;
-		int successshot=0;
 		int peças=0;
 		int victory=0;
 		int loss=0;
 		int quit=0;
 		int jogadas=0;
 		int jogos=0;
-		double perwin=0;
-		double perloss=0;
-		double perthrown=0;
-		double avgjogadas=0;
+
 		boolean desistiu=false;
 		String desistir=" ";
 		
@@ -243,7 +237,7 @@ public class Main
 				// ----------------------------------//
 				
 				campo= new String[m][n];
-				//campo_player= new String[m][n];
+				campo_player= new String[m][n];
 
 				
 				for(int i=0; i<m; i++)
@@ -251,7 +245,7 @@ public class Main
 					for (int j=0; j<n; j++)
 					{
 				          campo[i][j]=".";
-				          //campo_player[i][j]=".";
+				          campo_player[i][j]=".";
 					}
 				}
 				
@@ -559,7 +553,7 @@ public class Main
 				}
 				System.out.println();
 				
-				for (int row =0; row<campo.length; row++) 
+				for (int row =0; row<campo_player.length; row++) 
 				{
 					if (row<10)
 					{
@@ -570,10 +564,10 @@ public class Main
 				        System.out.print(" "+row+"|");
 					}
 					
-			        for (int col = 0; col <campo[row].length; col++) 
+			        for (int col = 0; col <campo_player[row].length; col++) 
 			        {
 			        	
-			            System.out.print(campo[row][col]);
+			            System.out.print(campo_player[row][col]);
 			            if (col<10)
 			            {
 				            System.out.print("  ");
@@ -592,187 +586,196 @@ public class Main
 //Shoot				
 				if (desistiu==false)
 				{
-				System.out.println();
-				System.out.println("Shoot at X,Y:");
-				
-				int maxtentativa=0;
-				boolean acabou=false;
-				for (maxtentativa=0; maxtentativa<maxtentativas && acabou==false && desistiu==false; maxtentativa++)
-				{
-					while (!shootx && desistiu==false)										// Se não for válido o x entre 0 e m, repete, se escrever "Sair" desiste.
-					{
-						System.out.println("X:");
-						shootx=sc.hasNextInt();
-						boolean inteiro=false;
-
-						if (shootx)
-						{
-							x=sc.nextInt();
-							if (x>n || x<0)
-							{
-								System.out.println("Não escolheu uma entrada válida, repita sff:");
-								shootx=false;
-								inteiro=true;
-							}
-						}
+					System.out.println();
+					System.out.println("Shoot at X,Y:");
 					
-						else if (shootx==false && inteiro==false && desistiu==false)
+					int maxtentativa=0;
+					boolean acabou=false;
+					for (maxtentativa=0; maxtentativa<maxtentativas && acabou==false && desistiu==false; maxtentativa++)
+					{
+						while (!shootx && desistiu==false)										// Se não for válido o x entre 0 e m, repete, se escrever "Sair" desiste.
 						{
-							desistir=sc.nextLine();
-							if (desistir.equals("quit"))
+							System.out.println("X:");
+							shootx=sc.hasNextInt();
+							boolean inteiro=false;
+	
+							if (shootx)
 							{
-								++quit;
-								++jogos;
-								acabou=true;
-								desistiu=true;
-								System.out.println();
-								System.out.println("Desistiu.");
+								x=sc.nextInt();
+								if (x>n || x<0)
+								{
+									System.out.println("Não escolheu uma entrada válida, repita sff:");
+									shootx=false;
+									inteiro=true;
+								}
 							}
+						
+							else if (shootx==false && inteiro==false && desistiu==false)
+							{
+								desistir=sc.nextLine();
+								if (desistir.equals("quit"))
+								{
+									++quit;
+									++jogos;
+									acabou=true;
+									desistiu=true;
+									System.out.println();
+									System.out.println("Desistiu.");
+								}
+							}
+							
 						}
 						
-					}
+						while (!shooty && desistiu==false)										// Se não for válido o y entre 0 e n, repete, se escrever "Sair" desiste.
+						{
+							System.out.println("Y:");
+							shooty=sc.hasNextInt();
+							boolean inteiro1=false;
+							
+							if (shooty)
+							{
+								y=sc.nextInt();
+								if (y>m || y<0)
+								{
+									System.out.println("Não escolheu uma entrada válida, repita sff:");
+									shootx=false;
+									inteiro1=true;
+								}
+							}
+							else if (shooty==false && inteiro1==false && desistiu==false)
+							{
+								desistir=sc.nextLine();
+								if (desistir.equals("quit"))
+								{
+									++quit;
+									++jogos;
+									acabou=true;
+									desistiu=true;
+									System.out.println();
+									System.out.println("Desistiu.");
+								}
+							}
+						}		
+						entry=false;
 					
-					while (!shooty && desistiu==false)										// Se não for válido o y entre 0 e n, repete, se escrever "Sair" desiste.
-					{
-						System.out.println("Y:");
-						shooty=sc.hasNextInt();
-						boolean inteiro1=false;
-						
-						if (shooty)
-						{
-							y=sc.nextInt();
-							if (y>m || y<0)
-							{
-								System.out.println("Não escolheu uma entrada válida, repita sff:");
-								shootx=false;
-								inteiro1=true;
-							}
-						}
-						else if (shooty==false && inteiro1==false && desistiu==false)
-						{
-							desistir=sc.nextLine();
-							if (desistir.equals("quit"))
-							{
-								++quit;
-								++jogos;
-								acabou=true;
-								desistiu=true;
-								System.out.println();
-								System.out.println("Desistiu.");
-							}
-						}
-					}		
-					entry=false;
-				}
 // -----------------------------------------------------//
 // Resultado a cada disparo:		
 
 					
 // Só falta trocar campo[y][x]="X" por campo_player[y][x]="X" etc...
 					
-					boolean status=false;
-					
-					if ((campo[y][x]).equals("S"))
-					{
-						campo[y][x]="X";
-						peças--;
-						++jogadas;
-						if (peças==0)
+						boolean status=false;
+						
+						if ((campo[y][x]).equals("S"))
 						{
-							System.out.println();
-							System.out.println("Vitória");
-							++victory;
+							campo[y][x]="X";
+							campo_player[y][x]="X";
+							peças--;
+							++jogadas;
+							if (peças==0)
+							{
+								System.out.println();
+								System.out.println("Vitória");
+								++victory;
+								++jogos;
+								acabou=true;
+								status=true;
+							}
+						}
+						
+						else if ((campo[y][x]).equals("."))
+						{
+							campo[y][x]="O";
+							campo_player[y][x]="O";
+							++jogadas;
+						}
+						
+						else if (((campo[y][x]).equals("X")) ||(campo[y][x]).equals("O"))
+						{
+							--jogadas;
+							System.out.println("Introduziu uma jogada já realizada, jogada não contada. Repita a jogada:");
+						}
+						
+						if (maxtentativa==maxtentativas-1)
+						{
+							System.out.println("Derrota");
+							++loss;
 							++jogos;
 							acabou=true;
 							status=true;
 						}
-					}
-					
-					else if ((campo[y][x]).equals("."))
-					{
-						campo[y][x]="O";
-						++jogadas;
-					}
-					
-					if (maxtentativa==maxtentativas-1)
-					{
-						System.out.println("Derrota");
-						++loss;
-						++jogos;
-						acabou=true;
-						status=true;
-					}
 
 
 // -----------------------------------------------------//
 // Visualização da matriz					
 					
 					
-					if (status==false)
-					{
-						
-						System.out.print(" ");
-						System.out.print(" ");
-						System.out.print("X");
-						System.out.print("|");
-						for (z=0;z<=n-1;z++)
+						if (status==false)
 						{
-							if (z<n-1)
-							{
-								System.out.print(z+"  ");
-							}
-							else
-							{
-								System.out.println(z+"  ");
-							}
-						}
-						System.out.print("Y");
-						System.out.print("_");
-						System.out.print("_");
-						System.out.print("|");
-						for (z=0;z<=n-1;z++)
-						{
-							if (z>=10) 
-							{
-								System.out.print("__  ");
-							}
-							else 
-							{
-								System.out.print("__ ");
-							}
-						}
-						System.out.println();
-						
-						for (int row =0; row<campo.length; row++) 
-						{
-							if (row<10)
-							{
-						       	System.out.print(" "+row+" |");
-							}
-							else 
-							{
-						        System.out.print(" "+row+"|");
-							}
 							
-					        for (int col = 0; col <campo[row].length; col++) 
-					        {
-					        	
-					            System.out.print(campo[row][col]);
-					            if (col<10)
-					            {
-						            System.out.print("  ");
-					            }
-					            else
-					            {
-						            System.out.print("   ");
-					            }
-					        }
-					        System.out.println();
-					    }
+							System.out.print(" ");
+							System.out.print(" ");
+							System.out.print("X");
+							System.out.print("|");
+							for (z=0;z<=n-1;z++)
+							{
+								if (z<n-1)
+								{
+									System.out.print(z+"  ");
+								}
+								else
+								{
+									System.out.println(z+"  ");
+								}
+							}
+							System.out.print("Y");
+							System.out.print("_");
+							System.out.print("_");
+							System.out.print("|");
+							for (z=0;z<=n-1;z++)
+							{
+								if (z>=10) 
+								{
+									System.out.print("__  ");
+								}
+								else 
+								{
+									System.out.print("__ ");
+								}
+							}
+							System.out.println();
+							
+							for (int row =0; row<campo_player.length; row++) 
+							{
+								if (row<10)
+								{
+							       	System.out.print(" "+row+" |");
+								}
+								else 
+								{
+							        System.out.print(" "+row+"|");
+								}
+								
+						        for (int col = 0; col <campo_player[row].length; col++) 
+						        {
+						        	
+						            System.out.print(campo_player[row][col]);
+						            if (col<10)
+						            {
+							            System.out.print("  ");
+						            }
+						            else
+						            {
+							            System.out.print("   ");
+						            }
+						        }
+						        System.out.println();
+						    }
+						}
+						shootx=false;
+						shooty=false;
+						entry=false;
 					}
-					shootx=false;
-					shooty=false;
-					entry=false;
 				}						// Fecha a secção de Shoot
 			}					// Fecha y==1
 		
